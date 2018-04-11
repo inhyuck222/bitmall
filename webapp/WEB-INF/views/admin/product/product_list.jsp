@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -44,7 +45,7 @@
 		<td align="left" width="120" valign="bottom">
 			<input type="submit" value="검색">
 			&nbsp;
-			<a href="product_new"><input type="button" value="새상품"></a>
+			<a href="${pageContext.servletContext.contextPath }/admin/product/add"><input type="button" value="상품 등록"></a>
 		</td>
 	</tr>
 	<tr><td height="5"></td></tr>
@@ -54,38 +55,22 @@
 <table width="800" border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
 	<tr bgcolor="#CCCCCC" height="23"> 
 		<td width="100" align="center">제품분류</td>
-		<td width="100" align="center">제품코드</td>
 		<td width="280" align="center">제품명</td>
-		<td width="70"  align="center">판매가</td>
-		<td width="50"  align="center">상태</td>
-		<td width="120" align="center">이벤트</td>
+		<td width="70"  align="center">판매가</td>		
 		<td width="80"  align="center">수정/삭제</td>
 	</tr>
-	
-	<tr bgcolor="#F2F2F2" height="23">	
-		<td width="100">&nbsp 코트</td>
-		<td width="100">&nbsp Coat001</td>
-		<td width="280">&nbsp 비싼 코트</td>	
-		<td width="70"  align="right">4,500,000 &nbsp</td>	
-		<td width="50"  align="center">판매중</td>	
-		<td width="120" align="center">&nbsp New Hit Sale(10%)</td>	
-		<td width="80"  align="center">
-			<a href="product_edit.jsp">수정</a>/
-			<a href="#">삭제</a>
-		</td>
-	</tr>
-	<tr bgcolor="#F2F2F2" height="23">	
-		<td width="100">&nbsp 코트</td>
-		<td width="100">&nbsp Coat001</td>
-		<td width="280">&nbsp 비싼 코트</td>	
-		<td width="70"  align="right">4,500,000 &nbsp</td>	
-		<td width="50"  align="center">판매중</td>	
-		<td width="120" align="center">&nbsp New Hit Sale(10%)</td>	
-		<td width="80"  align="center">
-			<a href="product_edit.jsp">수정</a>/
-			<a href="#">삭제</a>
-		</td>
-	</tr>	
+
+	<c:forEach items='${productMapList }' var='product'>
+		<tr bgcolor="#F2F2F2" height="23">
+			<td width="100">${product.categoryName }</td>
+			<td width="280">${product.name }</td>
+			<td width="70"  align="right">${product.price }</td>	
+			<td width="80"  align="center">
+				<a href="product_edit.jsp">수정</a>/
+				<a href="#">삭제</a>
+			</td>
+		</tr>
+	</c:forEach>
 </table>
 
 <br>

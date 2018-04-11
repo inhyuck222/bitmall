@@ -17,12 +17,12 @@
 
 <script>
 var ejsFaQListItem = new EJS({
-	url : "${pageContext.request.contextPath }/assets/js/ejs/template/faqListItem.ejs",
+	url : "${pageContext.request.contextPath }/assets/js/ejs/template/categoryListItem.ejs",
 });
 
 $(function(){
 	
-	var deleteDialog = $("#dialog-delete-faq").dialog({
+	var deleteDialog = $("#dialog-delete-category").dialog({
 		autoOpen: false, 
 		height: 300, 
 		width: 350, 
@@ -30,15 +30,17 @@ $(function(){
 		buttons: {
 			"확인": function(){
 				
-				var no = deleteDialog.faqNo;
+				var no = deleteDialog.categoryNo;
 				var tr = deleteDialog.parentTr;
 				
 				$.ajax({
-					url: "/bitmall/api/admin/faq/delete", 
+					url: "/bitmall/api/admin/category/delete", 
 					type: "get", 
 					dataType: "json", 
 					data: "no=" + no, 
 					success: function(response){
+						
+						
 						
 						if(response.result == "fail"){
 							console.log(response.message)
@@ -48,9 +50,9 @@ $(function(){
 
 						$(tr).remove();
 						
-						var length = $("#faq-list-table tr").length;
+						var length = $("#category-list-table tr").length;
 						
-						$("#faq-list-table #faq-num").each(function(index){
+						$("#category-list-table #category-num").each(function(index){
 							$(this).text(length - index - 1);
 						});
 						
@@ -65,29 +67,29 @@ $(function(){
 		}, 
 		close: function(){
 			
-			$("#dialog-delete-faq p").html();
+			$("#dialog-delete-category p").html();
 			$(".validateTips.error").hide();
 		}
 	});
 	
-	$(document).on("click", "#delete-faq", function(event){
+	$(document).on("click", "#delete-category", function(event){
 		
 		event.preventDefault();
 		
 		var no = $(this).data("no");
-		var trElement = $(this).closest("#faq-list-table-item");
-		var message = $(this).data("title");
+		var trElement = $(this).closest("#category-list-table-item");
+		var message = $(this).data("name");
 		message = "\"" + message + "\"";
 		message += "<br/><br/>삭제 하시겠습니까?"
 				
-		$("#dialog-delete-faq p").html(message);
+		$("#dialog-delete-category p").html(message);
 		
-		deleteDialog.faqNo = no;
+		deleteDialog.categoryNo = no;
 		deleteDialog.parentTr = trElement;
 		deleteDialog.dialog("open");
 	});
 	
-	var updateDialog = $("#dialog-update-faq").dialog({
+	var updateDialog = $("#dialog-update-category").dialog({
 		autoOpen: false, 
 		height: 400, 
 		width: 600, 
@@ -96,36 +98,35 @@ $(function(){
 			"수정": function(){
 				
 				var data = {};
-				$.each($("#dialog-update-faq-form").serializeArray(), function(index, values){
+				$.each($("#dialog-update-category-form").serializeArray(), function(index, values){
 					
 					data[values.name] = values.value;
 				});
 				data.no = $("#update-hidden-no").val();
+				
 				$.ajax({
-					url: "/bitmall/api/admin/faq/update", 
+					url: "/bitmall/api/admin/category/update", 
 					type: "post",
 					dataType: "json", 
 					data: JSON.stringify(data), 
 					contentType: "application/json", 
-					success: function(response) {	
+					success: function(response) {
 						
 						if(response.result == "fail") {
 							console.log(response.message)
 							$(".validateTips.error").show();
 							return;
 						}
-						
+
 						var trElement = updateDialog.parentSelected;						
-						$(trElement).find("#faq-title").text(data.title);
-						$(trElement).find("#update-faq").data("title", data.title);
-						$(trElement).find("#update-faq").data("content", data.content);
-						$(trElement).find("#delete-faq").data("title", data.title);
-						$(trElement).find("#delete-faq").data("content", data.content);
+						$(trElement).find("#category-name").text(response.data.name);
+						$(trElement).find("#update-category").data("name", response.data.name);
+						$(trElement).find("#delete-category").data("name", response.data.name);
 						
 						updateDialog.dialog("close");
 					}
 				});
-			} 
+			}
 		}, 
 		close: function() {
 			
@@ -134,39 +135,37 @@ $(function(){
 		}
 	});
 
-	$(document).on("click", "#update-faq", function(event){
+	$(document).on("click", "#update-category", function(event){
 		
 		event.preventDefault();
 		
 		var no = $(this).data("no");
-		var title = $(this).data("title");
-		var content = $(this).data("content");
+		var name = $(this).data("name");
 		$("#update-hidden-no").val(no);
-		$("#update-faq-title").val(title);
-		$("#update-faq-content").val(content);
+		$("#update-category-name").val(name);		
 		
 		updateDialog.parentSelected = $(this).closest("tr");		
 		updateDialog.dialog("open");
 	});
 	
-	var addDialog = $( "#dialog-add-faq" ).dialog({
+	var addDialog = $( "#dialog-add-category" ).dialog({
 		autoOpen: false, 
-		height: 400, 
-		width: 600, 
+		height: 200, 
+		width: 250, 
 		modal: true, 
 		buttons: {
 			"등록": function(){
 				
 				var data = {};				
 				
-				$.each($("#dialog-add-faq-form").serializeArray(), function(index, values){
+				$.each($("#dialog-add-category-form").serializeArray(), function(index, values){
 					data[values.name] = values.value;
 				});
 				//console.log(data);
 				
 				//ajax 통신
 				$.ajax({
-					url: "/bitmall/api/admin/faq/add", 
+					url: "/bitmall/api/admin/category/add", 
 					type: "post",
 					dataType: "json", 
 					contentType: "application/json", 
@@ -180,18 +179,18 @@ $(function(){
 						
 						if(response.data == -1) {
 							$(".validateTips.error").show();
-							$("#add-faq-title").val("");
-							$("#add-faq-content").val("");
+							$("#add-category-name").val("");
 							return;
 						}
-						
-						var length = $("#faq-list-table tr").length;
+
+						var length = $("#category-list-table tr").length;
 						response.data.index = length;
-						console.log(response.data);
-						var html = ejsFaQListItem.render(response.data);						
+						//console.log(response.data);
 						
-						$(html).insertAfter("#faq-list-table-header");						
-						$("#faq-list-table #faq-num").each(function(index){
+						var html = ejsFaQListItem.render(response.data);
+						
+						$(html).insertAfter("#category-list-table-header");						
+						$("#category-list-table #category-num").each(function(index){
 							$(this).text(length - index);
 						});
 						
@@ -207,8 +206,7 @@ $(function(){
 		close: function() {
 			
 			console.log("closed called")
-			$("#add-faq-title").val("");
-			$("#add-faq-content").val("");
+			$("#add-category-name").val("");
 			$(".validateTips.error").hide();
 		}
 	});
@@ -222,14 +220,14 @@ $(function(){
 });
 </script>
 <body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-	<c:set var="count" value="${fn:length(faqList) }"/>
+	<c:set var="count" value="${fn:length(categoryList) }"/>
 	
 	<br>
 	<jsp:include page="/WEB-INF/views/admin/include/admin-menu.jsp" />
 	<hr width='900' size='3'>
 	<table width="600" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td align="left" height="50" valign="bottom">&nbsp 자료수 : <font color="#FF0000">${count }</font></td>
+			<td align="left" height="50" valign="bottom">&nbsp 카테고리수 : <font color="#FF0000">${count }</font></td>
 			<td align="right" height="50" valign="bottom">
 				<a href="#"><input id='add-btn' type="button" value="신규입력"></a>&nbsp
 			</td>
@@ -239,44 +237,41 @@ $(function(){
 		</tr>
 	</table>
 
-	<table id='faq-list-table' width="600" border="1" cellspacing="0" cellpadding="4"
-		bordercolordark="white" bordercolorlight="black">
-		<tr id='faq-list-table-header' bgcolor="#CCCCCC" height="20">
+	<table id='category-list-table' width="600" border="1" cellspacing="0" cellpadding="4" bordercolordark="white" bordercolorlight="black">
+		<tr id='category-list-table-header' bgcolor="#CCCCCC" height="20">
 			<td width="50" align="center"><font color="#142712">번호</font></td>
-			<td width="450" align="center"><font color="#142712">제목</font></td>
+			<td width="450" align="center"><font color="#142712">카테고리명</font></td>
 			<td width="100" align="center"><font color="#142712">수정</font></td>
 			<td width="100" align="center"><font color="#142712">삭제</font></td>
 		</tr>
 
-		<c:forEach items='${faqList }' var='faq' varStatus='status'>
-			<tr id='faq-list-table-item' bgcolor="#F2F2F2" height="20">
-				<td id='faq-num' width="50" align="center">${count - status.index }</td>
-				<td id='faq-title' width="450" align="left">${faq.title }</td>
-				<td width="100" align="center"><a id='update-faq' href='#' data-no='${faq.no }' data-title='${faq.title }' data-content='${faq.content }'>수정</a></td>
-				<td width="100" align="center"><a id='delete-faq' href='#' data-no='${faq.no }' data-title='${faq.title }'>삭제</a></td>
+		<c:forEach items='${categoryList }' var='category' varStatus='status'>
+			<tr id='category-list-table-item' bgcolor="#F2F2F2" height="20">
+				<td id='category-num' width="50" align="center">${count - status.index }</td>
+				<td id='category-name' width="450" align="left">${category.name }</td>
+				<td width="100" align="center"><a id='update-category' href='#' data-no='${category.no }' data-name='${category.name }'>수정</a></td>
+				<td width="100" align="center"><a id='delete-category' href='#' data-no='${category.no }' data-name='${category.name }'>삭제</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<br>
 	
-	<div id='dialog-add-faq' title='신규 FaQ 입력' style='display:none'>		
-		<form id='dialog-add-faq-form'>
-			<input type='text' id='add-faq-title' name='title' value=''>
-			<textarea id='add-faq-content' name='content' rows='10' cols='60'></textarea>
+	<div id='dialog-add-category' title='신규 카테고리 입력' style='display:none'>		
+		<form id='dialog-add-category-form'>
+			<input type='text' id='add-category-name' name='name' value=''>
 		</form>
 		<p class='validateTips error' style='display:none'>입력 실패 입니다. 다시 입력해주세요.</p>
 	</div>
 	
-	<div id='dialog-update-faq' title='FaQ 수정' style='display:none'>		
-		<form id='dialog-update-faq-form'>
+	<div id='dialog-update-category' title='카테고리 수정' style='display:none'>		
+		<form id='dialog-update-category-form'>
 			<input id='update-hidden-no' type='hidden' value='' > 
-			<input type='text' id='update-faq-title' name='title' value=''>
-			<textarea id='update-faq-content' name='content' rows='10' cols='60'></textarea>
+			<input type='text' id='update-category-name' name='name' value=''>
 		</form>
-		<p class='validateTips error' style='display:none'>수정 실패 입니다. 다시 입력해주세요.</p>
+		<p class='validateTips error' style='display:none'>입력 실패 입니다. 다시 입력해주세요.</p>
 	</div>
 	
-	<div id="dialog-delete-faq" title="삭제 확인" style="display:none">
+	<div id="dialog-delete-category" title="삭제 확인" style="display:none">
 		<p></p>
 	</div>
 	

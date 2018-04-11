@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminProduct">
+
+	<resultMap id="productAtList" type="java.util.HashMap">
+		<result javaType="java.lang.Long" column="no" property="no"/>
+		<result javaType="java.lang.Long" column="categoryNo" property="categoryNo"/>
+		<result javaType="java.lang.String" column="categoryName" property="categoryName"/>
+		<result javaType="java.lang.String" column="name" property="name"/>
+		<result javaType="java.lang.Long" column="price" property="price"/>
+		<result javaType="java.lang.String" column="picturePath" property="picturePath"/>
+	</resultMap>
+
+
+	<select id="selectAllProduct" resultMap="productAtList">
+		<![CDATA[
+			SELECT 
+				p.no, 
+			    p.category_no AS categoryNo,  
+			    p.name, 
+			    p.price, 
+			    p.picture_path AS picturePath, 
+			    c.name AS categoryName 
+			FROM product p JOIN category c ON c.no = p.category_no
+		]]>
+	</select>
+	
+</mapper>

@@ -3,15 +3,17 @@ package com.cafe24.bitmall.service.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.bitmall.dao.admin.FaQDao;
 import com.cafe24.bitmall.vo.FaQVo;
 
-@Service
+@Service("adminFaQService")
 public class FaQService {
 	
 	@Autowired
+	@Qualifier("adminFaQDao")
 	FaQDao faqDao;
 	
 	public List<FaQVo> getAllFaQList() {

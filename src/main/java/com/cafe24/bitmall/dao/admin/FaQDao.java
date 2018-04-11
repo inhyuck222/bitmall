@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cafe24.bitmall.vo.FaQVo;
 
-@Repository
+@Repository("adminFaQDao")
 public class FaQDao {
 
 	@Autowired

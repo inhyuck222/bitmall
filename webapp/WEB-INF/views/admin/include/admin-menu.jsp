@@ -20,7 +20,7 @@
 							                    <td width='100'><font color='#0457A2'>▶ </font><a href='${pageContext.servletContext.contextPath }/admin/member'><font color='#0457A2'>회원관리</font></a></td>
 							                    <td width='100'><font color='#0457A2'>▶ </font><a href='${pageContext.servletContext.contextPath }/admin/product'><font color='#0457A2'>상품관리</font></a></td>
 							                    <td width='100'><font color='#0457A2'>▶ </font><a href='${pageContext.servletContext.contextPath }/admin/order'><font color='#0457A2'>주문관리</font></a></td>
-							                    <td width='100'><font color='#0457A2'>▶ </font><a href='${pageContext.servletContext.contextPath }/admin/opt'><font color='#0457A2'>옵션관리</font></a></td>
+							                    <td width='100'><font color='#0457A2'>▶ </font><a href='${pageContext.servletContext.contextPath }/admin/category'><font color='#0457A2'>카테고리관리</font></a></td>
 							                    <td width='100'><font color='#0457A2'>▶ </font><a href='${pageContext.servletContext.contextPath }/admin/faq'><font color='#0457A2'>FAQ관리</font></a></td>
 							                    <td width='100'><font color='#0457A2'>▶ </font><a href='${pageContext.servletContext.contextPath }/admin/logout'><font color='#0457A2'>로그아웃</font></a></td>
 						                  	</tr>

@@ -12,7 +12,7 @@ import com.cafe24.bitmall.dto.JSONResult;
 import com.cafe24.bitmall.service.admin.FaQService;
 import com.cafe24.bitmall.vo.FaQVo;
 
-@Controller("apiFaQController")
+@Controller("apiAdminFaQController")
 @RequestMapping("/api/admin/faq")
 public class FaQController {
 	

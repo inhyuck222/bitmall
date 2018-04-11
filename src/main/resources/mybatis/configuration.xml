@@ -5,15 +5,19 @@
 	<typeAliases>
 		<typeAlias alias="uservo" type="com.cafe24.bitmall.vo.UserVo"/>
 		<typeAlias alias="authvo" type="com.cafe24.bitmall.vo.AuthVo"/>
-		<typeAlias alias="faqvo" type="com.cafe24.bitmall.vo.FaQVo"/>		
+		<typeAlias alias="faqvo" type="com.cafe24.bitmall.vo.FaQVo"/>
+		<typeAlias alias="productvo" type="com.cafe24.bitmall.vo.ProductVo"/>
+		<typeAlias alias="categoryvo" type="com.cafe24.bitmall.vo.CategoryVo"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml"/>
 
 		<mapper resource="mybatis/mappers/auth.xml"/>
-		<mapper resource="mybatis/mappers/adminUser.xml"/>		
-		<mapper resource="mybatis/mappers/adminFaQ.xml"/>		
+		<mapper resource="mybatis/mappers/adminUser.xml"/>
+		<mapper resource="mybatis/mappers/adminFaQ.xml"/>
+		<mapper resource="mybatis/mappers/adminProduct.xml"/>
+		<mapper resource="mybatis/mappers/adminCategory.xml"/>
 	</mappers>
 	
 </configuration>

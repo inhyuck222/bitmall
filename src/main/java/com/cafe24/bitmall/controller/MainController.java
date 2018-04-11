@@ -23,6 +23,6 @@ public class MainController {
 
 	@RequestMapping( "/admin" )
 	public String admin() {
-		return "admin/member/member";
+		return "admin/opt/opts_edit";
 	}
 }

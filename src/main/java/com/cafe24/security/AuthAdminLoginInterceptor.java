@@ -36,7 +36,7 @@ public class AuthAdminLoginInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();		
 		session.setAttribute("adminUser", adminUser);
 		
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect(request.getContextPath()+"/admin/product");
 		
 		return false;
 	}
