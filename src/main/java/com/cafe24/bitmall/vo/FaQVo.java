@@ -1,0 +1,37 @@
+package com.cafe24.bitmall.vo;
+
+public class FaQVo {
+	private Long no;
+	private String title;
+	private String content;
+
+	public Long getNo() {
+		return no;
+	}
+
+	public void setNo(Long no) {
+		this.no = no;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	@Override
+	public String toString() {
+		return "FaQ [no=" + no + ", title=" + title + ", content=" + content + "]";
+	}
+
+}

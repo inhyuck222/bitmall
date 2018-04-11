@@ -10,4 +10,19 @@ public class MainController {
 	public String index() {
 		return "main/index";
 	}
+	
+	@RequestMapping( "/order" )
+	public String order() {
+		return "order/order";
+	}
+	
+	@RequestMapping( "/jumun" )
+	public String jumun() {
+		return "order/order_info";
+	}
+
+	@RequestMapping( "/admin" )
+	public String admin() {
+		return "admin/member/member";
+	}
 }

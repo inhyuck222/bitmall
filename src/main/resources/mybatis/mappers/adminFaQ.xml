@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminFaQ">
+	<select id="selectAll" resultType="faqvo">
+		<![CDATA[
+			SELECT
+				no, 
+			    title, 
+			    content
+			FROM faq
+			ORDER BY no DESC
+		]]>
+	</select>
+	
+	<update id="updateFaQ" parameterType="faqvo">
+		<![CDATA[
+			UPDATE faq 
+				SET 
+					title=#{title }, 
+					content=#{content }
+			WHERE no=#{no }
+		]]>
+	</update>
+	
+	<delete id="deleteFaQ" parameterType="faqvo">
+		<![CDATA[
+			DELETE FROM faq 
+			WHERE no=#{no }
+		]]>
+	</delete>
+	
+	<insert id="insertNewFaQ" parameterType="faqvo">
+		<![CDATA[
+			INSERT 
+			INTO faq 
+			VALUES ( null, #{title }, #{content } )
+		]]>
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+			<![CDATA[
+				select last_insert_id()
+			]]>
+		</selectKey>
+	</insert>
+</mapper>
