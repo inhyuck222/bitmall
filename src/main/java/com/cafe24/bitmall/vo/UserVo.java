@@ -1,11 +1,28 @@
 package com.cafe24.bitmall.vo;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UserVo {
 	private Long no;
+	
+	@NotEmpty
+	@Email
 	private String email;
+	
+	@NotEmpty	
 	private String password;
+	
+	@NotEmpty
 	private String name;
+	
+	@NotEmpty
+	@Pattern(regexp="[0-9]+")
 	private String phone;
+	
+	@NotEmpty
 	private String address;
 
 	public Long getNo() {

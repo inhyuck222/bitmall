@@ -46,7 +46,6 @@
 									<table border="0" cellspacing="0" cellpadding="0">
 										<tr> 
 											<td><A HREF="http://www.ftc.go.kr/" target="_blank"><img src="${pageContext.servletContext.contextPath }/assets/images/footer_pic1.gif" border="0"></A></td>
-											<td><img src="footer_line.gif" width="3" height="42"></td>
 											<td><A HREF="http://www.sgic.co.kr/" target="_blank"><img src="${pageContext.servletContext.contextPath }/assets/images/footer_pic2.gif" border="0"></a></td>
 										</tr>
 									</table>

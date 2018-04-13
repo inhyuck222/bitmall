@@ -8,6 +8,15 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<link href="${pageContext.servletContext.contextPath }/assets/css/font.css" rel="stylesheet" type="text/css">
 </head>
+
+<script type="text/javascript">
+$(function(){
+	
+	$("#form-login")
+	
+});
+</script>
+
 <body style="margin:0">
 <jsp:include page="/WEB-INF/views/include/head.jsp"/>
 <jsp:include page="/WEB-INF/views/include/search.jsp"/>
@@ -53,26 +62,26 @@
 												</table>
 												<table border="0" cellpadding="0" cellspacing="0" width="320">
 													<!-- form2 시작 ------>
-													<form name = "form2" method = "post" action = "/user/member_loginok">
-													<tr>
-														<td width="220" height="25">
-															<p style="padding-left:10px;">
-															<img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/login_id.gif" width="40" height="13" border="0"> 
-															<input type="text" name="id" size="20" maxlength="12" class="cmfont1">
-															</p>
-														</td>
-														<td width="100" rowspan="2">
-															<input type="image" align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/b_login.gif" width="50" border="0">
-														</td>
-													</tr>
-													<tr>
-														<td width="220" height="25">
-															<p style="padding-left:10px;">
-															<img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/login_pw.gif" width="40" height="13" border="0"> 
-															<input type="password" name="password" size="20" maxlength="12" class="cmfont1">
-															</p>
-														</td>
-													</tr>
+													<form id='form-login' method="post" action="${pageContext.servletContext.contextPath }/user/auth">
+														<tr>
+															<td width="220" height="25">
+																<p style="padding-left:10px;">
+																	<img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/login_id.gif" width="40" height="13" border="0"> 
+																	<input type="text" name="email" size="20" maxlength="12" class="cmfont1">
+																</p>
+															</td>
+															<td width="100" rowspan="2">
+																<input type='submit' value="로그인"/>
+															</td>
+														</tr>
+														<tr>
+															<td width="220" height="25">
+																<p style="padding-left:10px;">
+																	<img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/login_pw.gif" width="40" height="13" border="0"> 
+																	<input type="password" name="password" size="20" maxlength="12" class="cmfont1">
+																</p>
+															</td>
+														</tr>
 													</form>
 													<!--form2 끝 ------>
 												</table>

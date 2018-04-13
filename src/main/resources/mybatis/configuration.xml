@@ -8,16 +8,19 @@
 		<typeAlias alias="faqvo" type="com.cafe24.bitmall.vo.FaQVo"/>
 		<typeAlias alias="productvo" type="com.cafe24.bitmall.vo.ProductVo"/>
 		<typeAlias alias="categoryvo" type="com.cafe24.bitmall.vo.CategoryVo"/>
+		<typeAlias alias="stockvo" type="com.cafe24.bitmall.vo.StockVo"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml"/>
+		<mapper resource="mybatis/mappers/userProduct.xml"/>
 
 		<mapper resource="mybatis/mappers/auth.xml"/>
 		<mapper resource="mybatis/mappers/adminUser.xml"/>
 		<mapper resource="mybatis/mappers/adminFaQ.xml"/>
 		<mapper resource="mybatis/mappers/adminProduct.xml"/>
 		<mapper resource="mybatis/mappers/adminCategory.xml"/>
+		<mapper resource="mybatis/mappers/adminStock.xml"/>
 	</mappers>
 	
 </configuration>

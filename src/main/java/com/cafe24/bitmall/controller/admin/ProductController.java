@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.bitmall.service.admin.CategoryService;
 import com.cafe24.bitmall.service.admin.ProductService;
+import com.cafe24.bitmall.service.admin.StockService;
 import com.cafe24.bitmall.vo.CategoryVo;
 import com.cafe24.bitmall.vo.ProductVo;
-import com.cafe24.bitmall.vo.StockVo;
 
 @Controller("adminProductController")
 @RequestMapping("/admin/product")
@@ -28,6 +30,10 @@ public class ProductController {
 	@Autowired
 	@Qualifier("adminCategoryService")
 	CategoryService categoryService;
+
+	@Autowired
+	@Qualifier("adminStockService")
+	StockService stockService;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String productMain(Model model) {
@@ -48,14 +54,24 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String addProduct(Model model, @ModelAttribute ProductVo productVo, @ModelAttribute StockVo stockVo) {
+	public String addProduct(
+			Model model, 
+			@ModelAttribute ProductVo product, 
+			@RequestParam("size") String[] size, 
+			@RequestParam("quantity") Long[] quantity, 
+			@RequestParam("picture") MultipartFile pictureFile) {
 		
-		System.out.println(productVo);
-		System.out.println(stockVo);
+		boolean result = productService.registProduct(product, pictureFile);
+		if(result == false) {
+			return "redirect:/admin/product/add";
+		}
 		
-		return "admin/product/product_new";
+		result = stockService.insertStock(product, size, quantity);
+		if(result == false) {
+			return "redirect:/admin/product/add";
+		}
 		
-		//return "redirect:/admin/product/";
+		return "redirect:/admin/product/";
 	}
 
 }

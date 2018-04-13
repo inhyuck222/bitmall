@@ -270,7 +270,7 @@ $(function(){
 	<div id='dialog-update-faq' title='FaQ 수정' style='display:none'>		
 		<form id='dialog-update-faq-form'>
 			<input id='update-hidden-no' type='hidden' value='' > 
-			<input type='text' id='update-faq-title' name='title' value=''>
+			<input type='text' id='update-faq-title' name='title' value=''>			
 			<textarea id='update-faq-content' name='content' rows='10' cols='60'></textarea>
 		</form>
 		<p class='validateTips error' style='display:none'>수정 실패 입니다. 다시 입력해주세요.</p>
@@ -278,6 +278,7 @@ $(function(){
 	
 	<div id="dialog-delete-faq" title="삭제 확인" style="display:none">
 		<p></p>
+		<p class='validateTips error' style='display:none'>삭제 실패 입니다. 다시 입력해주세요.</p>
 	</div>
 	
 </body>

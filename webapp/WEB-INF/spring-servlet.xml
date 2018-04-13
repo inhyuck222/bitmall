@@ -33,9 +33,9 @@
 		</mvc:message-converters>
 
 		<!-- argument resolver -->
-		<!--mvc:argument-resolvers>
+		<mvc:argument-resolvers>
 			<bean class="com.cafe24.security.AuthUserHandlerMethodArgumentResolver" />
-		</mvc:argument-resolvers -->
+		</mvc:argument-resolvers>
 
 	</mvc:annotation-driven>
 
@@ -49,13 +49,23 @@
 			<mvc:mapping path="/admin/logout" />
 			<bean class="com.cafe24.security.AuthAdminLogoutInterceptor" />
 		</mvc:interceptor>
-		<!--mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth" />
+			<bean class="com.cafe24.security.AuthUserLoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.cafe24.security.AuthUserLogoutInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/admin/auth" />
+			<mvc:exclude-mapping path="/admin/logout" />
 			<mvc:exclude-mapping path="/user/auth" />
 			<mvc:exclude-mapping path="/user/logout" />
 			<mvc:exclude-mapping path="/assets/**" />
 			<bean class="com.cafe24.security.AuthInterceptor" />
-		</mvc:interceptor -->
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
@@ -70,7 +80,7 @@
 	</bean>
 
 	<!-- resource mapping -->
-	<mvc:resources location="file:/uploads/" mapping="/uploads/images/**" />
+	<mvc:resources location="file:/bitmall/" mapping="/bitmall/images/**" />
 
 	<!-- 멀티파트 리졸버 -->
 	<bean id="multipartResolver"
@@ -85,6 +95,15 @@
 		<!-- defaultEncoding -->
 		<property name="defaultEncoding" value="utf-8" />
 
+	</bean>
+	
+	<!-- MessageSource -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages_valid</value>
+			</list>
+		</property>
 	</bean>
 
 	<!-- 빈 설정을 annotation 기반으로 하겠다 -->

@@ -5,6 +5,14 @@ public class StockVo {
 	private Long productNo;
 	private String size;
 	private Long quantity;
+	
+	public StockVo() {
+	}
+	
+	public StockVo(String size, Long quantity) {
+		this.size = size;
+		this.quantity = quantity;
+	}
 
 	public Long getNo() {
 		return no;
