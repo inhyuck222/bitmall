@@ -9,11 +9,14 @@
 		<typeAlias alias="productvo" type="com.cafe24.bitmall.vo.ProductVo"/>
 		<typeAlias alias="categoryvo" type="com.cafe24.bitmall.vo.CategoryVo"/>
 		<typeAlias alias="stockvo" type="com.cafe24.bitmall.vo.StockVo"/>
+		<typeAlias alias="cartvo" type="com.cafe24.bitmall.vo.CartVo"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml"/>
 		<mapper resource="mybatis/mappers/userProduct.xml"/>
+		<mapper resource="mybatis/mappers/userStock.xml"/>
+		<mapper resource="mybatis/mappers/userCart.xml"/>
 
 		<mapper resource="mybatis/mappers/auth.xml"/>
 		<mapper resource="mybatis/mappers/adminUser.xml"/>

@@ -25,4 +25,5 @@ public class StockDao {
 		
 		return count != 0;
 	}
+		
 }

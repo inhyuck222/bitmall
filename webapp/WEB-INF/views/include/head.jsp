@@ -34,14 +34,6 @@
 			<td>
 				<a href="${pageContext.servletContext.contextPath }/user/join">Join</a>
 			</td>
-			<td><img src="${pageContext.servletContext.contextPath }/assets/images/top_menu_line.gif"width="11"></td>
-			<td>
-				<a href="#">Cart</a>
-			</td>
-			<td><img src="${pageContext.servletContext.contextPath }/assets/images/top_menu_line.gif"width="11"></td>
-			<td>
-				<a href="#">My Order</a>
-			</td>
 		</c:when>
 		
 		<c:otherwise>
@@ -66,7 +58,7 @@
 				<img src="${pageContext.servletContext.contextPath }/assets/images/top_menu_line.gif" width="11">
 			</td>
 			<td>
-				<a href="#">Cart</a>
+				<a href="${pageContext.servletContext.contextPath }/cart/list">Cart</a>
 			</td>
 			<td>
 				<img src="${pageContext.servletContext.contextPath }/assets/images/top_menu_line.gif" width="11">

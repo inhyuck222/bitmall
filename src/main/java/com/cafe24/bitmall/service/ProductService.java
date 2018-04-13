@@ -22,5 +22,11 @@ public class ProductService {
 		
 		return productList;
 	}
+	
+	public ProductVo getProduct(Long productNo) {
+		ProductVo product = productDao.selectTheProduct(productNo);
+		
+		return product;
+	}
 
 }

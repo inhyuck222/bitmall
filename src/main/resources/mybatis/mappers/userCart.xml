@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userCart">
+
+	<resultMap id="cartInfoMap" type="java.util.HashMap">
+		<result javaType="java.lang.Long" column="cartNo" property="cartNo"/>
+		<result javaType="java.lang.Long" column="productNo" property="productNo"/>
+		<result javaType="java.lang.Long" column="userNo" property="userNo"/>
+		<result javaType="java.lang.Long" column="quantity" property="quantity"/>
+		<result javaType="java.lang.Long" column="amount" property="amount"/>
+		<result javaType="java.lang.String" column="size" property="size"/>
+		<result javaType="java.lang.String" column="picturePath" property="picturePath"/>
+		<result javaType="java.lang.String" column="productName" property="productName"/>
+		<result javaType="java.lang.Long" column="price" property="price"/>
+		<result javaType="java.lang.Long" column="categoryNo" property="categoryNo"/>
+	</resultMap>
+	
+	<select id="selectAllCartInfoByUserNo" parameterType="long" resultMap="cartInfoMap">
+		<![CDATA[
+			SELECT 
+				c.no AS cartNo, 
+			    c.product_no AS productNo, 
+			    c.user_no AS userNo, 
+			    c.quantity, 
+			    c.amount, 
+			    c.size, 
+			    p.picture_path AS picturePath, 
+			    p.name AS productName, 
+			    p.price, 
+			    p.category_no AS categoryNo 
+			FROM cart c JOIN product p ON c.product_no = p.no
+			WHERE user_no=#{userNo }
+			ORDER BY c.no DESC
+		]]>
+	</select>
+	
+	<select id="selectExistenceCart" parameterType="cartvo" resultType="cartvo">
+		<![CDATA[
+			SELECT 
+				no, 
+			    product_no AS productNo, 
+			    user_no AS userNo, 
+			    quantity, 
+			    amount, 
+			    size
+			FROM cart
+			WHERE product_no=#{productNo }
+			AND user_no=#{userNo }
+		]]>
+	</select>
+	
+	<insert id="insertNewCart" parameterType="cartvo">
+		<![CDATA[
+			INSERT 
+			INTO cart 
+			VALUES
+				(null, 
+				#{productNo }, 
+				#{userNo }, 
+				#{quantity }, 
+				#{amount }, 
+				#{size })
+		]]>
+	</insert>
+	
+	<update id="updateExistenceCart" parameterType="cartvo">
+		<![CDATA[
+			UPDATE cart 
+			SET 
+				amount=#{amount }, 
+				quantity=#{quantity } 
+			WHERE product_no=#{productNo } 
+			AND user_no=#{userNo }
+		]]>
+	</update>
+	
+	<delete id="deleteCartItemByNo" parameterType="cartvo">
+		<![CDATA[
+			DELETE 
+			FROM cart 
+			WHERE no=#{no }
+		]]>
+	</delete>
+	
+</mapper>

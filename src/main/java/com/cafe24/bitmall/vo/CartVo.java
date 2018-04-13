@@ -1,10 +1,28 @@
 package com.cafe24.bitmall.vo;
 
 public class CartVo {
+	private Long no;
 	private Long productNo;
 	private Long userNo;
 	private Long quantity;
 	private Long amount;
+	private String size;
+	
+	public Long getNo() {
+		return no;
+	}
+
+	public void setNo(Long no) {
+		this.no = no;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 
 	public Long getProductNo() {
 		return productNo;
@@ -40,8 +58,8 @@ public class CartVo {
 
 	@Override
 	public String toString() {
-		return "Cart [productNo=" + productNo + ", userNo=" + userNo + ", quantity=" + quantity + ", amount=" + amount
-				+ "]";
+		return "CartVo [no=" + no + ", productNo=" + productNo + ", userNo=" + userNo + ", quantity=" + quantity
+				+ ", amount=" + amount + ", size=" + size + "]";
 	}
-
+	
 }

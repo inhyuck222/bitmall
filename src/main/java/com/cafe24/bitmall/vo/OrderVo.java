@@ -9,6 +9,24 @@ public class OrderVo {
 	private String orderDate;
 	private String payment;
 	private String status;
+	private String recipientName;
+	private String recipientPhone;
+
+	public String getRecipientName() {
+		return recipientName;
+	}
+
+	public void setRecipientName(String recipientName) {
+		this.recipientName = recipientName;
+	}
+
+	public String getRecipientPhone() {
+		return recipientPhone;
+	}
+
+	public void setRecipientPhone(String recipientPhone) {
+		this.recipientPhone = recipientPhone;
+	}
 
 	public Long getNo() {
 		return no;
@@ -76,8 +94,9 @@ public class OrderVo {
 
 	@Override
 	public String toString() {
-		return "Order [no=" + no + ", userNo=" + userNo + ", code=" + code + ", amount=" + amount + ", address="
-				+ address + ", orderDate=" + orderDate + ", payment=" + payment + ", status=" + status + "]";
+		return "OrderVo [no=" + no + ", userNo=" + userNo + ", code=" + code + ", amount=" + amount + ", address="
+				+ address + ", orderDate=" + orderDate + ", payment=" + payment + ", status=" + status
+				+ ", recipientName=" + recipientName + ", recipientPhone=" + recipientPhone + "]";
 	}
-
+	
 }

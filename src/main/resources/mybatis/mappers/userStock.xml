@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userStock">
+	
+	<select id="selectAllByProductNo" parameterType="long" resultType="stockvo">
+		<![CDATA[
+			SELECT
+				no, 
+			    product_no AS productNo, 
+			    size, 
+			    quantity
+			FROM stock
+			WHERE product_no = #{no }
+		]]>
+	</select>
+	
+	<select id="selectByStockNo" parameterType="long" resultType="stockvo">
+		<![CDATA[
+			SELECT
+				no, 
+			    product_no AS productNo, 
+			    size, 
+			    quantity
+			FROM stock
+			WHERE no = #{no }
+		]]>
+	</select>
+	
+	<update id="updateStockQuantity" parameterType="stockvo">
+		<![CDATA[
+			UPDATE stock 
+			SET quantity=#{quantity }
+			WHERE no=#{no }
+		]]>
+	</update>
+	
+	<update id="updateStockQuantityFromCart" parameterType="cartvo">
+		<![CDATA[
+			UPDATE stock 
+			SET quantity=quantity+#{quantity }
+			WHERE product_no=#{productNo } 
+			AND size=#{size }
+		]]>
+	</update>
+	
+</mapper>

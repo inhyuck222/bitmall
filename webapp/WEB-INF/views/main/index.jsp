@@ -37,11 +37,11 @@
 				<!---1번째 줄-->
 				<tr>
 					<c:forEach items='${productList }' var='product'>
-						<td width="150" height="205" align="center" valign="top">
+						<td width="200" height=300 align="center" valign="top">
 							<table border="0" cellpadding="0" cellspacing="0" width="100" class="cmfont">
 								<tr> 
 									<td align="center"> 
-										<a href="#"><img src="${pageContext.servletContext.contextPath }${product.picturePath}" width="120" height="140" border="0"></a>
+										<a href="${pageContext.servletContext.contextPath }/product/${product.categoryNo}/${product.no}"><img src="${pageContext.servletContext.contextPath }${product.picturePath}" width="120" height="140" border="0"></a>
 									</td>
 								</tr>
 								<tr>
@@ -49,11 +49,11 @@
 								</tr>
 								<tr> 
 									<td height="20" align="center">
-										<a href="product_detail.jsp?no=1"><font color="444444">${product.name }</font></a>&nbsp;
+										<a href="${pageContext.servletContext.contextPath }/product/${product.categoryNo}/${product.no}"><font color="444444">${product.name }</font></a>&nbsp;
 									</td>
 								</tr>
 								<tr>
-									<td height="20" align="center"><b>${product.price }</b></td>
+									<td height="20" align="center"><b>${product.price } 원</b></td>
 								</tr>
 							</table>
 						</td>

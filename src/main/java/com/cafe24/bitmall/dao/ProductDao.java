@@ -21,4 +21,10 @@ public class ProductDao {
 		return productList;
 	}
 	
+	public ProductVo selectTheProduct(Long productNo) {
+		ProductVo product = sqlSession.selectOne("userProduct.selectTheProduct", productNo);
+		
+		return product;
+	}
+	
 }

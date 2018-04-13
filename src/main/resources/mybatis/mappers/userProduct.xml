@@ -15,4 +15,17 @@
 		]]>
 	</select>
 	
+	<select id="selectTheProduct" parameterType="long" resultType="productvo">
+		<![CDATA[
+			SELECT 
+				no, 
+			    category_no AS categoryNo,  
+			    name, 
+			    price, 
+			    picture_path AS picturePath 			     
+			FROM product
+			WHERE no=#{no }			
+		]]>
+	</select>
+	
 </mapper>
