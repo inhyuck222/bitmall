@@ -44,13 +44,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		
 		if(auth.role() == Role.ADMIN) {
 			sessionUser = (UserVo)session.getAttribute("adminUser");
+			if(sessionUser == null) {
+				response.sendRedirect(request.getContextPath() + "/admin/login");
+				return false;
+			}
 		}else if(auth.role() == Role.USER) {
 			sessionUser = (UserVo)session.getAttribute("authUser");
-		}
-		
-		if(sessionUser == null) {
-			response.sendRedirect(request.getContextPath() + "/user/login");
-			return false;
+			if(sessionUser == null) {
+				response.sendRedirect(request.getContextPath() + "/user/login");
+				return false;
+			}
 		}
 		
 		// 6. 접근 허가		

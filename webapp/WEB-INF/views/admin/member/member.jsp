@@ -33,45 +33,29 @@
 	</form>
 </table>
 <table width="800" border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
-	<tr bgcolor="#CCCCCC" height="23"> 
-		<td width="100" align="center">ID</td>
-		<td width="100" align="center">이름</td>
-		<td width="100" align="center">전화</td>
-		<td width="100" align="center">핸드폰</td>
+	<tr bgcolor="#CCCCCC" height="23">
+		<td width="200" align="center">번호</td>
 		<td width="200" align="center">E-Mail</td>
-		<td width="100" align="center">회원구분</td>
+		<td width="100" align="center">이름</td>
+		<td width="100" align="center">핸드폰</td>
+		<td width="100" align="center">주소</td>
 		<td width="100" align="center">수정/삭제</td>
 	</tr>
 	
-	
-	<tr bgcolor="#F2F2F2" height="23">	
-		<td width="100">&nbsp id1</td>	
-		<td width="100">&nbsp 홍길동</td>	
-		<td width="100">&nbsp 02 -123-1234</td>	
-		<td width="100">&nbsp 011-123-1234</td>	
-		<td width="200">&nbsp abcd@abcd.com</td>	
-		<td width="100" align="center">회원</td>	
-		<td width="100" align="center">
-			<a href="#">수정</a>/
-			<a href="#">삭제</a>
-		</td>
-	</tr>
-	
-	<c:forEach var="vo" items="${list }" varStatus="status">
-	
-	<tr bgcolor="#F2F2F2" height="23">	
-		<td width="100">&nbsp ${vo.id }</td>	
-		<td width="100">&nbsp ${vo.name }</td>	
-		<td width="100">&nbsp ${vo.phone_number }</td>	
-		<td width="100">&nbsp ${vo.handphone }</td>	
-		<td width="200">&nbsp ${vo.email }</td>	
-		<td width="100" align="center">${vo.type }</td>	
-		<td width="100" align="center">
-			<a href="#">수정</a>/
-			<a href="#">삭제</a>
-		</td>
-	</tr>
+	<c:forEach items="${memberList }" var="member">
+		<tr bgcolor="#F2F2F2" height="23">
+			<td width="100">&nbsp ${member.no }</td>
+			<td width="100">&nbsp ${member.email }</td>
+			<td width="100">&nbsp ${member.name }</td>	
+			<td width="100">&nbsp ${member.phone }</td>
+			<td width="100">&nbsp ${member.address }</td>
+			<td width="100">
+				<a href="#">수정</a>/
+				<a href="#">삭제</a>
+			</td>
+		</tr>
 	</c:forEach>
+	
 </table>
 <br>
 <table width="800" border="0" cellpadding="0" cellspacing="0">
