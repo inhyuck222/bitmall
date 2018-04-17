@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cafe24.bitmall.vo.UserVo;
 
-@Repository
+@Repository("adminUserDao")
 public class AdminUserDao {
 	
 	@Autowired
@@ -19,4 +19,10 @@ public class AdminUserDao {
 		return adminUser;
 	}
 
+	public UserVo selectUserByUserNo(Long userNo) {
+		UserVo orderUser = sqlSession.selectOne("adminUser.selectUserByUserNo", userNo);
+		
+		return orderUser;
+	}
+	
 }

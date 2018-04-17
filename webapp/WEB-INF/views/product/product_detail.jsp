@@ -22,6 +22,11 @@ $(function(){
 		$("#form-product").submit();
 	});
 	
+	$("#submit-order").click(function(event){
+		event.preventDefault();
+		var page = "${pageContext.servletContext.contextPath }/order"
+	});
+	
 });
 
 </script>
@@ -81,10 +86,10 @@ $(function(){
 									</td>
 									<td width="1" bgcolor="E8E7EA"></td>
 									<td style="padding-left:10px">
-										<font color="282828">${product.name }</font><br>																		 
+										<font color="282828">${product.name }</font><br>
 									</td>
 								</tr>
-								<tr><td colspan="3" bgcolor="E8E7EA"></td></tr>							
+								<tr><td colspan="3" bgcolor="E8E7EA"></td></tr>
 								<!-- 판매가 -->
 								<tr>
 									<td width="80" height="35" style="padding-left:10px">
@@ -129,12 +134,10 @@ $(function(){
 							</table>
 							<table border="0" cellpadding="0" cellspacing="0" width="370" class="cmfont">
 								<tr>
-									<td height="70" align="center">
-										<!--a href="#"><img src="${pageContext.servletContext.contextPath }/assets/images/b_order.gif" border="0" align="absmiddle"></a-->
-										<input id='submit-order' type='submit' value='바로 구매'>
+									<td height="70" align="center">										
+										<!--input id='submit-order' type='submit' value='바로 구매'-->
 										&nbsp;&nbsp;&nbsp;
-										<input id='submit-cart' type='submit' value='장바구니'>
-										<!--a href="${pageContext.servletContext.contextPath }/cart/add"><img src="${pageContext.servletContext.contextPath }/assets/images/b_cart.gif"  border="0" align="absmiddle"></a-->
+										<input id='submit-cart' type='submit' value='장바구니'>										
 									</td>
 								</tr>
 							</table>

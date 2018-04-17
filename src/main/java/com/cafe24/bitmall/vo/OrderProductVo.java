@@ -1,6 +1,6 @@
 package com.cafe24.bitmall.vo;
 
-public class OrderProduct {
+public class OrderProductVo {
 	private Long no;	
 	private Long orderNo;
 	private Long productNo;

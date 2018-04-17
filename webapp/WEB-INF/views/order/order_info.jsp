@@ -1,10 +1,35 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title>비트닷컴 쇼핑몰</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<link href="${pageContext.servletContext.contextPath }/assets/css/font.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.servletContext.contextPath }/assets/css/font.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/ejs/ejs.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+<script type="text/javascript">
+var deliveryCharge = 2500;
+var setPaymentAmount = function(){
+	var totalAmount = 0;
+	var loadTotalPrice = $("font[id='amount-products']").each(function(index, o){
+		totalAmount += parseInt($(o).data("amount"));
+	});	
+	var paymentAmount = totalAmount + deliveryCharge;
+	
+	$("#total-amount").text(totalAmount);
+	$("#payment-amount").text(paymentAmount);	
+}
+
+$(function(){
+	setPaymentAmount();
+});
+</script>
+
 <body style="margin:0">
 <jsp:include page="/WEB-INF/views/include/head.jsp"/>
 <jsp:include page="/WEB-INF/views/include/search.jsp"/>
@@ -46,85 +71,29 @@
 				</tr>
 				<tr><td colspan="6" bgcolor="DEDCDD"></td></tr>
 
+				<c:forEach items='${orderProductInfoList }' var='orderProductInfo'>
+					<tr>
+						<td width="60">
+							<a href="${pageContext.servletContext.contextPath }/product/${orderProductInfo.categoryNo }/${orderProductInfo.productNo }"><img src="${pageContext.servletContext.contextPath }/${orderProductInfo.picturePath }" width="50" height="50" border="0"></a>
+						</td>
+						<td height="52">
+							<font color="686868">상품명3</font><br><font color="#0066CC">[옵션]</font> ${orderProductInfo.size }
+						</td>
+						<td align="center"><font color="686868">${orderProductInfo.quantity }</font></td>
+						<td align="right"><font color="686868">${orderProductInfo.price } 원</font></td>
+						<td align="right"><font id='amount-products' color="686868" data-amount='${orderProductInfo.amount }'>${orderProductInfo.amount } 원</font></td>
+					</tr>
+					<tr><td colspan="6" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
+				</c:forEach>				
 				<tr>
-					<td width="60">
-						<a href="product_detail.html?no=0000"><img src="${pageContext.servletContext.contextPath }/assets/images/product/0000_s.jpg" width="50" height="50" border="0"></a>
+					<td align="left" bgcolor="#F0F0F0"><img src="${pageContext.servletContext.contextPath }/assets/images/cart_image1.gif" border="0"></td>
+					<td align="right" bgcolor="#F0F0F0">
+						<font color="#0066CC">총 합계금액</font>
+						 : 상품대금(<label id='total-amount'></label>) + 배송료(2,500원) = 
+						<font color="#FF3333"><b id='payment-amount'></b></font>&nbsp;&nbsp
 					</td>
-					<td height="52">
-						<font color="686868">상품명3</font><br><font color="#0066CC">[옵션]</font> 옵션3
-					</td>
-					<td align="center"><font color="686868">1</font></td>
-					<td align="right"><font color="686868">120,000 원</font></td>
-					<td align="right"><font color="686868">120,000 원</font></td>
-				</tr>
-				<tr><td colspan="6" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
-
-				<tr>
-					<td width="60">
-						<a href="product_detail.html?no=0000"><img src="${pageContext.servletContext.contextPath }/assets/images/product/0000_s.jpg" width="50" height="50" border="0"></a>
-					</td>
-					<td height="52">
-						<font color="686868">상품명1</font><br><font color="#0066CC">[옵션]</font> 옵션1
-					</td>
-					<td align="center"><font color="686868">1</font></td>
-					<td align="right"><font color="686868">120,000 원</font></td>
-					<td align="right"><font color="686868">120,000 원</font></td>
-				</tr>
-				<tr><td colspan="6" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
-
-				<tr>
-					<td width="60">
-						<a href="product_detail.html?no=0000"><img src="${pageContext.servletContext.contextPath }/assets/images/product/0000_s.jpg" width="50" height="50" border="0"></a>
-					</td>
-					<td height="30">
-						<font color="686868">상품명2</font><br><font color="#0066CC">[옵션]</font> 옵션1
-					</td>
-					<td align="center"><font color="686868">1</font></td>
-					<td align="right"><font color="686868">20,000 원</font></td>
-					<td align="right"><font color="686868">20,000 원</font></td>
 				</tr>
 				<tr><td colspan="6" height="2" bgcolor="8B9CBF"></td></tr>
-			</table>
-
-			<br><br><br>
-
-			<table border="0" cellpadding="0" cellspacing="0" width="690">
-				<tr>
-					<td><img src="${pageContext.servletContext.contextPath }/assets/images/jumun_title3.gif" border="0" align="absmiddle"></td>
-				</tr>
-				<tr><td height="5"></td></tr>
-			</table>
-			<table border="0" cellpadding="0" cellspacing="0" width="685" class="cmfont">
-				<tr><td height="2" bgcolor="8B9CBF"></td></tr>
-			</table>
-			<table border="0" cellpadding="0" cellspacing="1" width="685" bgcolor="#EEEEEE" class="cmfont">
-				<tr height="25">
-					<td width="100" bgcolor="#F2F2F2">&nbsp;주문번호</td>
-					<td width="242" bgcolor="#FFFFFF">&nbsp;<font color="#686868">200701020001<font></td>
-					<td width="100" bgcolor="#F2F2F2">&nbsp;결제금액</td>
-					<td width="243" bgcolor="#FFFFFF">&nbsp;<font color="#D06404"><b>137,400 원</b></font></td>
-				</tr>
-				<tr height="25">
-					<td width="100" bgcolor="#F2F2F2">&nbsp;결제방식</td>
-					<td width="242" bgcolor="#FFFFFF">&nbsp;<font color="#686868">카드</font></td>
-					<td width="100" bgcolor="#F2F2F2">&nbsp;승인번호</td>
-					<td width="243" bgcolor="#FFFFFF">&nbsp;<font color="#686868">12341234</font></td>
-				</tr>
-				<tr height="25">
-					<td width="100" bgcolor="#F2F2F2">&nbsp;카드종류</td>
-					<td width="242" bgcolor="#FFFFFF">&nbsp;<font color="#686868">국민카드</font></td>
-					<td width="100" bgcolor="#F2F2F2">&nbsp;할부</td>
-					<td width="243" bgcolor="#FFFFFF">&nbsp;<font color="#686868">일시불</font></td>
-				</tr>
-				<tr height="25">
-					<td width="100" bgcolor="#F2F2F2">&nbsp;결제방식</td>
-					<td width="242" bgcolor="#FFFFFF">&nbsp;<font color="#686868">온라인 (국민:000-00-0000-0000)</font></td>
-					<td width="100" bgcolor="#F2F2F2">&nbsp;보낸사람</td>
-					<td width="243" bgcolor="#FFFFFF">&nbsp;<font color="#686868">홍길동</font></td>
-				</tr>
-			</table>
-			<table border="0" cellpadding="0" cellspacing="0" width="685" class="cmfont">
-				<tr><td height="2" bgcolor="8B9CBF"></td></tr>
 			</table>
 
 			<br><br><br>
@@ -140,37 +109,24 @@
 			</table>
 			<table border="0" cellpadding="0" cellspacing="1" width="685" bgcolor="#EEEEEE" class="cmfont">
 				<tr height="25">
+					<td width="100" bgcolor="#F2F2F2">&nbsp;결제 방식</td>
+					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">${orderInfo.payment }</font></td>
+				</tr>
+				<tr height="25">
 					<td width="100" bgcolor="#F2F2F2">&nbsp;주문자명</td>
-					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">홍길동</font></td>
+					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">${orderInfo.recipientName }</font></td>
 				</tr>
 				<tr height="25">
 					<td width="100" bgcolor="#F2F2F2">&nbsp;전화번호</td>
-					<td width="242" bgcolor="#FFFFFF">&nbsp;<font color="#686868">02-111-1234</font></td>
-					<td width="100" bgcolor="#F2F2F2">&nbsp;휴대폰</td>
-					<td width="243" bgcolor="#FFFFFF">&nbsp;<font color="#686868">011-111-1111</font></td>
-				</tr>
-				<tr height="25">
-					<td width="100" bgcolor="#F2F2F2">&nbsp;이메일</td>
-					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">aaa@aaa.aa.aa</font></td>
-				</tr>
-				<tr><td height="1" bgcolor="8B9CBF" colspan="4"></td></tr>
-				<tr height="25">
-					<td width="100" bgcolor="#F2F2F2">&nbsp;수취인명</td>
-					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">홍길동</font></td>
-				</tr>
-				<tr height="25">
-					<td width="100" bgcolor="#F2F2F2">&nbsp;전화번호</td>
-					<td width="242" bgcolor="#FFFFFF">&nbsp;<font color="#686868">02-111-1234</font></td>
-					<td width="100" bgcolor="#F2F2F2">&nbsp;휴대폰</td>
-					<td width="243" bgcolor="#FFFFFF">&nbsp;<font color="#686868">010-111-1234</font></td>
+					<td width="242" bgcolor="#FFFFFF">&nbsp;<font color="#686868">${orderInfo.recipientPhone }</font></td>
 				</tr>
 				<tr height="25">
 					<td width="100" bgcolor="#F2F2F2">&nbsp;배달주소</td>
-					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">[139-911] &nbsp; 서울 노원구 월계4동  </font></td>
+					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">${orderInfo.recipientAddress }</font></td>
 				</tr>
 				<tr height="25">
 					<td width="100" bgcolor="#F2F2F2">&nbsp;메모</td>
-					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868"></font></td>
+					<td bgcolor="#FFFFFF" colspan="3">&nbsp;<font color="#686868">${orderInfo.requirements }</font></td>
 				</tr>
 				
 			</table>
@@ -181,7 +137,7 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="690">
 				<tr>
 					<td height="40" class="cmfont" align="right">
-						<a href="jumun.jsp"><img src="${pageContext.servletContext.contextPath }/assets/images/b_list.gif" border="0"></a>&nbsp;&nbsp;&nbsp
+						<a href="${pageContext.servletContext.contextPath }/order/list"><img src="${pageContext.servletContext.contextPath }/assets/images/b_list.gif" border="0"></a>&nbsp;&nbsp;&nbsp
 					</td>
 				</tr>
 			</table>

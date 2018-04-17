@@ -8,7 +8,7 @@ import com.cafe24.bitmall.dao.admin.AuthDao;
 import com.cafe24.bitmall.vo.AuthVo;
 import com.cafe24.bitmall.vo.UserVo;
 
-@Service
+@Service("adminUserService")
 public class AdminUserService {
 	
 	@Autowired
@@ -29,6 +29,13 @@ public class AdminUserService {
 		}
 		
 		return adminUser;
+	}
+	
+	public UserVo getUserByUserNo(Long userNo) {
+		
+		UserVo orderUser = adminUserDao.selectUserByUserNo(userNo);
+		
+		return orderUser;
 	}
 
 }

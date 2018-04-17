@@ -64,7 +64,7 @@
 				<img src="${pageContext.servletContext.contextPath }/assets/images/top_menu_line.gif" width="11">
 			</td>
 			<td>
-				<a href="#">My Order</a>
+				<a href="${pageContext.servletContext.contextPath }/order/list">My Order</a>
 			</td>
 			<td>
 				<img src="${pageContext.servletContext.contextPath }/assets/images/top_menu_line.gif"width="11">

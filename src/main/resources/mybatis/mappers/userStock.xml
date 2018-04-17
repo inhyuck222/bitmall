@@ -26,6 +26,19 @@
 		]]>
 	</select>
 	
+	<select id="selectStockByProductNoAndSize" parameterType="map" resultType="stockvo">
+		<![CDATA[
+			SELECT
+				no, 
+			    product_no AS productNo, 
+			    size, 
+			    quantity
+			FROM stock
+			WHERE product_no = #{productNo }
+			AND size = #{productSize }
+		]]>
+	</select>
+	
 	<update id="updateStockQuantity" parameterType="stockvo">
 		<![CDATA[
 			UPDATE stock 
@@ -40,6 +53,14 @@
 			SET quantity=quantity+#{quantity }
 			WHERE product_no=#{productNo } 
 			AND size=#{size }
+		]]>
+	</update>
+	
+	<update id="updateStockQuantityFromCartForUpdating" parameterType="stockvo">
+		<![CDATA[
+			UPDATE stock 
+			SET quantity=quantity+#{quantity }
+			WHERE no=#{no }
 		]]>
 	</update>
 	

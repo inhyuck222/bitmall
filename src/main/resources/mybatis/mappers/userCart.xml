@@ -74,6 +74,16 @@
 		]]>
 	</update>
 	
+	<update id="updateCartQuantity" parameterType="cartvo">
+		<![CDATA[
+			UPDATE cart 
+			SET 
+				amount=#{amount }, 
+				quantity=#{quantity } 
+			WHERE no=#{no }
+		]]>
+	</update>
+	
 	<delete id="deleteCartItemByNo" parameterType="cartvo">
 		<![CDATA[
 			DELETE 
@@ -81,5 +91,13 @@
 			WHERE no=#{no }
 		]]>
 	</delete>
+	
+	<delete id="deleteCartItemWhenOrder" parameterType="map">
+		<![CDATA[
+			DELETE 
+			FROM cart 
+			WHERE no=#{cartNo }
+		]]>
+	</delete>	
 	
 </mapper>

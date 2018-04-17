@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminOrder">
+
+	<select id="selectAllOrder" resultType="ordervo">
+		<![CDATA[
+			SELECT
+				no, 
+			    user_no AS userNo, 
+			    code, 
+			    amount, 
+			    recipient_address AS recipientAddress, 
+			    order_date AS orderDate, 
+			    payment, 
+			    status, 
+			    recipient_name AS recipientName, 
+			    recipient_phone AS recipientPhone, 
+			    requirements 
+			FROM bitmall.`order`
+			ORDER BY no DESC
+		]]>
+	</select>
+	
+	<select id="selectOrderByOrderNo" parameterType="long" resultType="ordervo">
+		<![CDATA[
+			SELECT
+				no, 
+			    user_no AS userNo, 
+			    code, 
+			    amount, 
+			    recipient_address AS recipientAddress, 
+			    order_date AS orderDate, 
+			    payment, 
+			    status, 
+			    recipient_name AS recipientName, 
+			    recipient_phone AS recipientPhone, 
+			    requirements 
+			FROM bitmall.`order`
+			WHERE no=#{orderNo }
+		]]>
+	</select>
+	
+	<delete id="deleteOrder" parameterType="long">
+		<![CDATA[
+			DELETE
+			FROM bitmall.`order`
+			WHERE no=#{no }	
+		]]>
+	</delete>
+	
+	
+</mapper>

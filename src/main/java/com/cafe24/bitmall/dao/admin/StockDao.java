@@ -1,5 +1,8 @@
 package com.cafe24.bitmall.dao.admin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,6 +27,16 @@ public class StockDao {
 		int count = sqlSession.delete("adminStock.deleteAllByProductNo", productForDelete);
 		
 		return count != 0;
+	}
+	
+	public boolean updateStockQuantity(Long productNo, String size, Long quantity) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("productSize", size);
+		map.put("quantity", quantity);
+		int count = sqlSession.update("adminStock.updateStockQuantity", map);
+		
+		return count == 1;
 	}
 		
 }

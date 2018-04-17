@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminOrderProduct">
+	
+	<select id="selectOrderProductListByOrderNo" parameterType="long" resultType="orderproductinfodto">
+		<![CDATA[
+			SELECT
+				op.no AS orderProductNo, 
+				op.order_no AS orderNo, 
+				op.product_no AS productNo, 
+				op.quantity, 
+				op.amount, 
+				op.size, 
+				p.no AS productNo, 
+				p.category_no AS categoryNo,
+				p.picture_path AS picturePath, 
+				p.name AS productName, 
+				p.price AS price 
+			FROM order_product op JOIN product p ON op.product_no = p.no 
+			WHERE order_no=#{orderNo }
+		]]>
+	</select>
+	
+	<delete id="deleteOrderProduct" parameterType="long">
+		<![CDATA[
+			DELETE
+			FROM order_product
+			WHERE no=#{no }
+		]]>
+	</delete>
+	
+</mapper>

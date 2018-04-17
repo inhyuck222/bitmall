@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.bitmall.dao.StockDao;
+import com.cafe24.bitmall.dto.CartUpdateInfoDto;
 import com.cafe24.bitmall.vo.CartVo;
 import com.cafe24.bitmall.vo.StockVo;
 
@@ -44,5 +45,24 @@ public class StockService {
 		
 		return result;
 	}
+
+	public boolean updateStockQuantityFromCartForUpdating(StockVo stock) {
+		
+		boolean result = stockDao.updateStockQuantityFromCartForUpdating(stock);
+		
+		return result;
+	}
+	
+	public StockVo checkStockQuantity(CartUpdateInfoDto cartUpdateInfo) {
+		StockVo stock = stockDao.selectStockByProductNoAndSize(cartUpdateInfo.getCart().getProductNo(), cartUpdateInfo.getCart().getSize());
+		Long originQuantity = cartUpdateInfo.getOriginQuantity();
+		Long newQuantity = cartUpdateInfo.getCart().getQuantity();
+		if(stock.getQuantity() + originQuantity - newQuantity < 0) {
+			return null;
+		}
+		
+		return stock;
+	}
+	
 
 }

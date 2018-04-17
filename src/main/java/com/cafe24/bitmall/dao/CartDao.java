@@ -41,8 +41,21 @@ public class CartDao {
 		return count == 1;
 	}
 	
+	public boolean updateCartQuantity(CartVo cart) {
+		int count = sqlSession.update("userCart.updateCartQuantity", cart);
+		
+		return count == 1;
+		
+	}
+	
 	public boolean deleteCartItem(CartVo cart) {
 		int count = sqlSession.delete("userCart.deleteCartItemByNo", cart);
+		
+		return count == 1;
+	}
+	
+	public boolean deleteCartItemWhenOrder(Map<String, Object> orderProductInfo) {
+		int count = sqlSession.delete("userCart.deleteCartItemWhenOrder", orderProductInfo);
 		
 		return count == 1;
 	}

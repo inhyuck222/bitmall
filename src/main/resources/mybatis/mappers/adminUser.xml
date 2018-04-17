@@ -15,4 +15,18 @@
 			AND password = password(#{password })
 		]]>		
 	</select>
+	
+	<select id="selectUserByUserNo" parameterType="long" resultType="uservo">
+		<![CDATA[
+			SELECT 
+				no, 
+			    email, 
+			    name, 
+			    phone, 
+			    address 
+			FROM user
+			WHERE no=#{userNo }
+		]]>		
+	</select>
+	
 </mapper>

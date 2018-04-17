@@ -18,7 +18,7 @@ public class CartService {
 
 	@Autowired
 	@Qualifier("cartDao")
-	CartDao cartDao;
+	CartDao cartDao;	
 	
 	public CartVo addNewCart(UserVo authUser, ProductVo product, StockVo stock, Long amount, Long productQuantity) {
 		boolean result = false;
@@ -59,6 +59,14 @@ public class CartService {
 		List<Map<String, Object>> cartInfoList = cartDao.selectAllCartByUserNo(authUser.getNo());
 		
 		return cartInfoList;
+	}
+	
+	public boolean updateQuantityInCart(CartVo cart, StockVo stock, ProductVo product) {		
+		cart.setQuantity(stock.getQuantity());
+		cart.setAmount(cart.getQuantity() * product.getPrice());
+		boolean result = cartDao.updateCartQuantity(cart);
+		
+		return result;
 	}
 	
 }

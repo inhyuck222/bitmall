@@ -109,6 +109,89 @@ $(function(){
 		deleteDialog.dialog("open");
 	});
 	
+	var updateDialog = $("#dialog-update-cart").dialog({
+		autoOpen: false, 
+		height: 300, 
+		width: 350,
+		modal: true, 
+		buttons: {
+			"수정": function(){
+				
+				var cartNo = updateDialog.cartNo;
+				var quantity = parseInt(updateDialog.quantity);
+				var productNo = updateDialog.productNo;
+				var size = updateDialog.size;
+				var originQuantity = updateDialog.originQuantity;
+				var trElement = updateDialog.trElement;
+				
+				var data = {
+					cart : { 
+							no : cartNo,
+							quantity : quantity, 
+							productNo : productNo, 
+							size : size			
+						},
+					originQuantity : originQuantity
+							
+				};
+				
+				$.ajax({
+					url: "/bitmall/api/cart/update", 
+					type: "post",
+					dataType: "json", 
+					data: JSON.stringify(data), 
+					contentType: "application/json", 
+					success: function(response) {						
+						if(response.result == "fail") {
+							console.log(response.message);
+							$(trElement).find("#input-quantity-origin").val(data.originQuantity);
+							$(trElement).find("#input-quantity").val(data.originQuantity);
+							updateDialog.dialog("close");
+							return;
+						}
+						
+						$(trElement).find("#input-quantity-origin").val(response.data.quantity);
+						$(trElement).find("#input-quantity").val(response.data.quantity);
+						$(trElement).find("#amount-products").text(response.data.amount);
+						
+						setPaymentAmount();
+						
+						updateDialog.dialog("close");
+					}
+				});
+			} 
+		}, 
+		close: function() {
+			
+			console.log("update closed called");
+			$(".validateTips.error").hide();
+		}
+	});
+
+	$(document).on("click", "#update-cart", function(event){
+		event.preventDefault();
+		
+		var trElement = $(this).closest("tr");
+		var no = $(this).data("no");
+		var quantity = trElement.find("#input-quantity").val();
+		var originQuantity = trElement.find("#input-quantity-origin").val();
+		var productName = $(this).data("name");
+		var productNo = trElement.find("#input-product-no").val();
+		var size = $(trElement).find("#input-size-origin").val();
+		var message = "\"" + productName + "   [size : " + size + "]\"";
+		message += "<br/><br/>" + quantity + "개로 수정 하시겠습니까?";
+
+		$("#dialog-update-cart p").html(message);
+		
+		updateDialog.cartNo = no;
+		updateDialog.quantity = quantity;
+		updateDialog.productNo = productNo;
+		updateDialog.size = size;
+		updateDialog.originQuantity = originQuantity;
+		updateDialog.trElement = trElement;		
+		updateDialog.dialog("open");
+	});
+	
 });
 
 </script>
@@ -149,11 +232,11 @@ $(function(){
 	
 				<table border="0" cellpadding="5" cellspacing="1" width="710" class="cmfont" bgcolor="#CCCCCC">
 					<tr bgcolor="F0F0F0" height="23" class="cmfont">
-						<td width="420" align="center">상품</td>
+						<td width="380" align="center">상품</td>
 						<td width="70"  align="center">수량</td>
 						<td width="80"  align="center">가격</td>
 						<td width="90"  align="center">합계</td>
-						<td width="50"  align="center">삭제</td>
+						<td width="90"  align="center">삭제</td>
 					</tr>
 						<c:forEach items='${cartInfoList }' var='cartInfo'>
 							<tr id='cart-list-table-item'>
@@ -186,9 +269,8 @@ $(function(){
 									<input id='input-product-no' type="hidden" value="${cartInfo.productNo }">
 									<input id='input-size-origin' type="hidden" value="${cartInfo.size }">
 									<input id='input-quantity-origin' type="hidden" size="3" value="${cartInfo.quantity }">
-									<input type="submit" value='수정'>
-									<button id='delete-cart' data-no='${cartInfo.cartNo }' data-name='${cartInfo.productName }' data-size='${cartInfo.size }'>삭제</button>									
-									<!--a id='delete-cart' href="#" data-no='${cartInfo.cartNo }' data-name='${cartInfo.productName }' data-size='${cartInfo.size }'><img src="${pageContext.servletContext.contextPath }/assets/images/b_delete1.gif" border="0"></a>&nbsp -->
+									<button id="update-cart" data-no='${cartInfo.cartNo }' data-name='${cartInfo.productName }' data-size='${cartInfo.size }'>수정</button>
+									<button id='delete-cart' data-no='${cartInfo.cartNo }' data-name='${cartInfo.productName }' data-size='${cartInfo.size }'>삭제</button>
 								</td>
 							</tr>
 						</c:forEach>
@@ -200,7 +282,7 @@ $(function(){
 									<td align="right" bgcolor="#F0F0F0">
 										<font color="#0066CC">총 합계금액</font>
 										 : 상품대금(<label id='total-amount'></label>) + 배송료(2,500원) = 
-										<font color="#FF3333"><b id='payment-amount'>134,500원</b></font>&nbsp;&nbsp
+										<font color="#FF3333"><b id='payment-amount'></b></font>&nbsp;&nbsp
 									</td>
 								</tr>
 							</table>
@@ -210,9 +292,8 @@ $(function(){
 				<table width="710" border="0" cellpadding="0" cellspacing="0" class="cmfont">
 					<tr height="44">
 						<td width="710" align="center" valign="middle">
-							<a href="index.jsp"><img src="${pageContext.servletContext.contextPath }/assets/images/b_shopping.gif" border="0"></a>&nbsp;&nbsp;
-							<a href="#"><img src="${pageContext.servletContext.contextPath }/assets/images/b_cartalldel.gif" width="103" height="26" border="0"></a>&nbsp;&nbsp;
-							<a href="order"><img src="${pageContext.servletContext.contextPath }/assets/images/b_order1.gif" border="0"></a>
+							<a href="${pageContext.servletContext.contextPath }"><img src="${pageContext.servletContext.contextPath }/assets/images/b_shopping.gif" border="0"></a>&nbsp;&nbsp;
+							<a href="${pageContext.servletContext.contextPath }/order"><img src="${pageContext.servletContext.contextPath }/assets/images/b_order1.gif" border="0"></a>
 						</td>
 					</tr>
 				</table>
@@ -226,7 +307,10 @@ $(function(){
 		<p class='validateTips error' style='display:none'>삭제 실패 입니다. 다시 입력해주세요.</p>
 	</div>
 
-
+	<div id="dialog-update-cart" title="수정 확인" style="display:none">
+		<p></p>
+		<p class='validateTips error' style='display:none'>수정 실패 입니다. 다시 입력해주세요.</p>
+	</div>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 </body>

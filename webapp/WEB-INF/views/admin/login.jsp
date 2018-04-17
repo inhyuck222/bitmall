@@ -8,7 +8,7 @@
 <META HTTP-EQUIV="content-type" content="text/html; charset=utf-8">
 </head>
 
-<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red" onLoad="focusIt()">
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
 <br><br><br><br><br><br><br><br><br><br>
 <input type="hidden" name="no" value="${authUser.no}">
 

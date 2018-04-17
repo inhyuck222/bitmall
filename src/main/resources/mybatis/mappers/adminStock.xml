@@ -22,4 +22,14 @@
 		]]>
 	</delete>
 	
+	<update id="updateStockQuantity" parameterType="map">
+		<![CDATA[
+			UPDATE stock
+			SET 
+				quantity=quantity+#{quantity }
+			WHERE product_no=#{productNo }
+			AND size=#{productSize }
+		]]>
+	</update>
+	
 </mapper>

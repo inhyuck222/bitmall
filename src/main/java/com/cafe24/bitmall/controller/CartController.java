@@ -19,6 +19,8 @@ import com.cafe24.bitmall.vo.CartVo;
 import com.cafe24.bitmall.vo.ProductVo;
 import com.cafe24.bitmall.vo.StockVo;
 import com.cafe24.bitmall.vo.UserVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 import com.cafe24.security.AuthUser;
 
 @Controller("cartController")
@@ -36,7 +38,8 @@ public class CartController {
 	@Autowired
 	@Qualifier("stockService")
 	StockService stockService;
-		
+	
+	@Auth(role=Role.USER)
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(
 			Model model, 
@@ -75,7 +78,8 @@ public class CartController {
 		
 		return "redirect:list";		
 	}
-	
+
+	@Auth(role=Role.USER)
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String showCartList(Model model, @AuthUser UserVo authUser) {
 		
@@ -85,5 +89,7 @@ public class CartController {
 		
 		return "cart/cart_list";		
 	}
+	
+	
 
 }

@@ -41,73 +41,29 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="685" class="cmfont">
 				<tr><td colspan="5" height="3" bgcolor="#0066CC"></td></tr>
 				<tr bgcolor="F2F2F2">
-					<td width="80" height="30" align="center">주문일</td>
-					<td width="100"  align="center">주문번호</td>
-					<td width="290" align="center">제품명</td>
-					<td width="100" align="center">금액</td>
-					<td width="115" align="center">주문상태</td>
+					<td width="120" height="30" align="center">주문일</td>
+					<td width="120"  align="center">주문번호</td>
+					<td width="140" align="center">금액</td>
+					<td width="140" align="center">주문상태</td>
 				</tr>
 				<tr><td colspan="5" bgcolor="DEDCDD"></td></tr>
-
-				<tr>
-					<td height="30" align="center"><font color="686868">2007-01-02</font></td>
-					<td align="center">
-						<a href="jumun_info.jsp?no=13&page=1"><font color="#0066CC">200701020001</font></a>
-					</td>
-					<td><font color="686868">파란 브라우스 (외 2)</font></td>
-					<td align="right"><font color="686868">20,000 원</font></td>
-					<td align="center"><font color="#0066CC">주문신청</font></td>
-				</tr>
-				<tr><td colspan="5" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
-
-				<tr>
-					<td height="30" align="center"><font color="686868">2007-01-01</font></td>
-					<td align="center">
-						<a href="jumun_info.jsp?no=10&page=1"><font color="#0066CC">200701010011</font></a>
-					</td>
-					<td><font color="686868">하얀 브라우스 (외 1)</font></td>
-					<td align="right"><font color="686868">30,000 원</font></td>
-					<td align="center"><font color="#0066CC">배송중</font></td>
-				</tr>
-				<tr><td colspan="5" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
-
-				<tr>
-					<td height="30" align="center"><font color="686868">2007-01-01</font></td>
-					<td align="center">
-						<a href="jumun_info.jsp?no=4&page=1"><font color="#0066CC">200701010005</font></a>
-					</td>
-					<td><font color="686868">파란 브라우스 (외 1)</font></td>
-					<td align="right"><font color="686868">30,000 원</font></td>
-					<td align="center"><font color="#D06404">주문취소</font></td>
-				</tr>
-				<tr><td colspan="5" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
-
-				<tr>
-					<td height="30" align="center"><font color="686868">2007-01-01</font></td>
-					<td align="center">
-						<a href="jumun_info.jsp?no=1&page=1"><font color="#0066CC">200701010001</font></a>
-					</td>
-					<td><font color="686868">실크 브라우스</font></td>
-					<td align="right"><font color="686868">30,000 원</font></td>
-					<td align="center"><font color="#686868">주문완료</font></td>
-				</tr>
-				<tr><td colspan="5" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
+				
+				<c:forEach items='${orderList }' var='orderInfo'>
+					<tr>
+						<td height="30" align="center"><font color="686868">${orderInfo.orderDate }</font></td>
+						<td align="center">
+							<a href="${pageContext.servletContext.contextPath }/order/detail?no=${orderInfo.no }"><font color="#0066CC">${orderInfo.code }</font></a>
+						</td>
+						<td align="center"><font color="686868">${orderInfo.amount }원</font></td>
+						<td align="center"><font color="#0066CC">${orderInfo.status }</font></td>
+					</tr>
+					<tr><td colspan="5" background="${pageContext.servletContext.contextPath }/assets/images/line_dot.gif"></td></tr>
+				</c:forEach>
+				
 
 				<tr><td colspan="5" height="2" bgcolor="#0066CC"></td></tr>
 			</table>
 			<br>
-			<table border="0" cellpadding="0" cellspacing="0" width="690">
-				<tr>
-					<td height="30" class="cmfont" align="center">
-						<img src="${pageContext.servletContext.contextPath }/assets/images/i_prev.gif" align="absmiddle" border="0"> 
-						<font color="#FC0504"><b>1</b></font>&nbsp;
-						<a href="jumun.jsp?page=2"><font color="#7C7A77">[2]</font></a>&nbsp;
-						<a href="jumun.jsp?page=3"><font color="#7C7A77">[3]</font></a>&nbsp;
-						<img src="${pageContext.servletContext.contextPath }/assets/images/i_next.gif" align="absmiddle" border="0">
-					</td>
-				</tr>
-			</table>
-
 <!-------------------------------------------------------------------------------------------->	
 <!-- 끝 : 다른 웹페이지 삽입할 부분                                                         -->
 <!-------------------------------------------------------------------------------------------->	
