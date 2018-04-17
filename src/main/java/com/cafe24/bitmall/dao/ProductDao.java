@@ -27,4 +27,10 @@ public class ProductDao {
 		return product;
 	}
 	
+	public List<ProductVo> selectProductListByCategoryNo(Long categoryNo) {
+		List<ProductVo> productList = sqlSession.selectList("userProduct.selectProductListByCategoryNo", categoryNo);
+		
+		return productList;
+	}
+	
 }

@@ -1,0 +1,7 @@
+#head-item {	
+	font-size: 12px;
+    color: #333;
+    font-family: 'dotum', '돋움';
+    white-space: nowrap;
+    cursor: pointer;
+}

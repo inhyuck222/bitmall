@@ -23,6 +23,7 @@
 		<mapper resource="mybatis/mappers/userCart.xml"/>
 		<mapper resource="mybatis/mappers/userOrder.xml"/>
 		<mapper resource="mybatis/mappers/userOrderProduct.xml"/>
+		<mapper resource="mybatis/mappers/userCategory.xml"/>		
 
 		<mapper resource="mybatis/mappers/auth.xml"/>
 		<mapper resource="mybatis/mappers/adminUser.xml"/>

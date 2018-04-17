@@ -78,5 +78,14 @@ public class ProductController {
 		
 		return "redirect:/admin/product/";
 	}
+	
+	@Auth(role=Role.ADMIN)
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String addProduct(@ModelAttribute Map<String, Object> map) {
+		
+		System.out.println(map);
+		
+		return "admin/product/";
+	}
 
 }

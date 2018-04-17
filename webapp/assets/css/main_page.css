@@ -1,0 +1,16 @@
+#container {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(4, 150px);
+}
+
+#container #item {
+  width: 150px;
+  height: 200px;
+}
+
+#item-image {
+	width : 140px;
+	height : 150px;
+	 border : 0px;
+}

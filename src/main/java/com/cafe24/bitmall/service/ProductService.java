@@ -28,5 +28,11 @@ public class ProductService {
 		
 		return product;
 	}
+	
+	public List<ProductVo> getProductListByCategoryNo(Long categoryNo) {
+		List<ProductVo> productList = productDao.selectProductListByCategoryNo(categoryNo);
+		
+		return productList;
+	}
 
 }
