@@ -15,6 +15,8 @@ import com.cafe24.bitmall.service.admin.OrderProductService;
 import com.cafe24.bitmall.service.admin.OrderService;
 import com.cafe24.bitmall.vo.OrderVo;
 import com.cafe24.bitmall.vo.UserVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("adminOrderController")
 @RequestMapping("/admin/order")
@@ -32,6 +34,7 @@ public class OrderController {
 	@Qualifier("adminOrderProductService")
 	OrderProductService orderProductService;
 	
+	@Auth(role=Role.ADMIN)
 	@RequestMapping("")
 	public String adminOrderList(Model model) {
 		List<OrderVo> orderList = orderService.getAllOrder();
@@ -40,6 +43,7 @@ public class OrderController {
 		return "admin/order/order_list";
 	}
 	
+	@Auth(role=Role.ADMIN)
 	@RequestMapping("/info")
 	public String showOrderInfo(Model model, @RequestParam("orderNo") Long orderNo) {
 

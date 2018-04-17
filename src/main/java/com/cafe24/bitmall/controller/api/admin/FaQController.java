@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cafe24.bitmall.dto.JSONResult;
 import com.cafe24.bitmall.service.admin.FaQService;
 import com.cafe24.bitmall.vo.FaQVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("apiAdminFaQController")
 @RequestMapping("/api/admin/faq")
@@ -19,6 +21,7 @@ public class FaQController {
 	@Autowired
 	FaQService faqService;
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public JSONResult addNewFaQ(@RequestBody FaQVo newFaQVo) {
@@ -31,6 +34,7 @@ public class FaQController {
 		return JSONResult.success(newFaQVo);		
 	}
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public JSONResult updateFaQ(@RequestBody FaQVo faQVo) {
@@ -43,6 +47,7 @@ public class FaQController {
 		return JSONResult.success(result);
 	}
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public JSONResult deleteFaQ(@ModelAttribute FaQVo faQVo) {

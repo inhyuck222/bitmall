@@ -18,6 +18,8 @@ import com.cafe24.bitmall.service.admin.ProductService;
 import com.cafe24.bitmall.service.admin.StockService;
 import com.cafe24.bitmall.vo.CategoryVo;
 import com.cafe24.bitmall.vo.ProductVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("adminProductController")
 @RequestMapping("/admin/product")
@@ -35,6 +37,7 @@ public class ProductController {
 	@Qualifier("adminStockService")
 	StockService stockService;
 	
+	@Auth(role=Role.ADMIN)
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String productMain(Model model) {
 		
@@ -44,6 +47,7 @@ public class ProductController {
 		return "admin/product/product_list";
 	}
 	
+	@Auth(role=Role.ADMIN)
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addProduct(Model model) {
 		
@@ -53,6 +57,7 @@ public class ProductController {
 		return "admin/product/product_new";
 	}
 	
+	@Auth(role=Role.ADMIN)
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String addProduct(
 			Model model, 

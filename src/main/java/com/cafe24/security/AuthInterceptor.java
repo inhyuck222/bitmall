@@ -33,9 +33,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			return true;
 		}
 		
-		if(auth.role() == Role.GUEST) {
-			return false;
-		}
 		// 5. @Auth가 붙어 있는 경우, 인증여부 체크
 		HttpSession session = request.getSession();
 		if(session == null) {
@@ -43,8 +40,15 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			return false;
 		}
 		
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
+		UserVo sessionUser = null;
+		
+		if(auth.role() == Role.ADMIN) {
+			sessionUser = (UserVo)session.getAttribute("adminUser");
+		}else if(auth.role() == Role.USER) {
+			sessionUser = (UserVo)session.getAttribute("authUser");
+		}
+		
+		if(sessionUser == null) {
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}

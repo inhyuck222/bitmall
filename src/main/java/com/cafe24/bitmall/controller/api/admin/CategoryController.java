@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cafe24.bitmall.dto.JSONResult;
 import com.cafe24.bitmall.service.admin.CategoryService;
 import com.cafe24.bitmall.vo.CategoryVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("apiAdminCategoryController")
 @RequestMapping("api/admin/category")
@@ -21,6 +23,7 @@ public class CategoryController {
 	@Qualifier("adminCategoryService")
 	CategoryService categoryService;
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public JSONResult addCategory(@RequestBody CategoryVo newCategoryVo) {
@@ -33,6 +36,7 @@ public class CategoryController {
 		return JSONResult.success(newCategoryVo);
 	}
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public JSONResult updateCategory(@RequestBody CategoryVo categoryVo) {
@@ -45,6 +49,7 @@ public class CategoryController {
 		return JSONResult.success(categoryVo);
 	}
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public JSONResult deleteCategory(@ModelAttribute CategoryVo categoryVo) {

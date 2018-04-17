@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cafe24.bitmall.service.admin.CategoryService;
 import com.cafe24.bitmall.vo.CategoryVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("adminCategoryController")
 @RequestMapping("/admin/category")
@@ -19,6 +21,7 @@ public class CategoryController {
 	@Qualifier("adminCategoryService")
 	CategoryService categoryService;
 	
+	@Auth(role=Role.ADMIN)
 	@RequestMapping("")
 	public String getAllCategory(Model model) {
 		

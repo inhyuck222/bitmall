@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cafe24.bitmall.service.admin.FaQService;
 import com.cafe24.bitmall.vo.FaQVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("adminFaQController")
 @RequestMapping("/admin/faq")
@@ -20,6 +22,7 @@ public class FaQController {
 	@Qualifier("adminFaQService")
 	FaQService faqService;
 	
+	@Auth(role=Role.ADMIN)
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String faqMain(Model model) {
 		

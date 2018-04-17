@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cafe24.bitmall.dto.JSONResult;
 import com.cafe24.bitmall.service.admin.ProductService;
 import com.cafe24.bitmall.vo.ProductVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("apiAdminProductController")
 @RequestMapping("api/admin/product")
@@ -20,6 +22,7 @@ public class ProductController {
 	@Qualifier("adminProductService")
 	ProductService productService;
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public JSONResult deleteProduct(@ModelAttribute ProductVo productForDelete) {

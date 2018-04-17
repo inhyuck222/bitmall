@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cafe24.bitmall.dto.JSONResult;
 import com.cafe24.bitmall.service.admin.OrderService;
 import com.cafe24.bitmall.vo.OrderVo;
+import com.cafe24.security.Auth;
+import com.cafe24.security.Auth.Role;
 
 @Controller("apiAdminOrderController")
 @RequestMapping("api/admin/order")
@@ -19,6 +21,7 @@ public class OrderController {
 	@Qualifier("adminOrderService")
 	OrderService orderService;
 	
+	@Auth(role=Role.ADMIN)
 	@ResponseBody
 	@RequestMapping("/delete")
 	public JSONResult deleteOrder(@RequestBody OrderVo order) {
