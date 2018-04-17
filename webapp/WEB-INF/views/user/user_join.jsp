@@ -21,10 +21,6 @@
 		</td>
 		<td width="10"></td>
 		<td valign="top">
-
-		<!-------------------------------------------------------------------------------------------->	
-		<!-- 시작 : 다른 웹페이지 삽입할 부분                                                                                                                                                            -->
-		<!-------------------------------------------------------------------------------------------->	
 			<table border="0" cellpadding="0" cellspacing="0" width="685" class="cmfont">
 				<tr>
 					<td><img src="${pageContext.servletContext.contextPath }/assets/images/login_title2.gif" border="0"></td>
@@ -120,7 +116,6 @@
 												<img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/i_dot.gif" border="0"> <font color="898989"><b>주 소</b></font>
 											</td>
 											<td> 
-												<!--a href="javascript:FindZip(0)"><img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/b_zip.gif" border="0"></a><br-->
 												<form:input path='address' size = "50" maxlength = "200" value = "" class="cmfont1"/><br/>
 												<p>
 													<strong>
@@ -128,12 +123,6 @@
 													</strong>
 												</p>
 											</td>
-											<!--td>
-												<input type="text" name='zip1' size = "4" maxlength = "3" value = "762" class="cmfont1"><font color="898989">-</font>
-												<input type="text" name='zip2' size = "4" maxlength = "3" value = "634" class="cmfont1"> 
-												<a href="javascript:FindZip(0)"><img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/b_zip.gif" border="0"></a><br>
-												<input type="text" name='address' size = "50" maxlength = "200" value = "경기도 안양" class="cmfont1"><br>
-											</td-->
 										</tr>										
 									</table>
 			
@@ -146,7 +135,7 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="685" class="cmfont">
 				<tr>
 					<td height="45" align="right">
-						<input type='submit' value='가입'>						
+						<input id='submit-join' type='submit' value='가입'>						
 						<button>취소</button>
 					</td>
 				</tr>

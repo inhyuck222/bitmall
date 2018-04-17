@@ -79,7 +79,7 @@ $(function(){
 							<!-- 상품명 -->
 							<table border="0" cellpadding="0" cellspacing="0" width="370" class="cmfont">
 								<tr><td colspan="3" bgcolor="E8E7EA"></td></tr>
-								<tr>
+								<tr id="product-detail-info">
 									<td width="80" height="45" style="padding-left:10px">
 										<img src="${pageContext.servletContext.contextPath }/assets/images/i_dot1.gif" width="3" height="3" border="0" align="absmiddle">
 										<font color="666666"><b>제품명</b></font>
@@ -91,7 +91,7 @@ $(function(){
 								</tr>
 								<tr><td colspan="3" bgcolor="E8E7EA"></td></tr>
 								<!-- 판매가 -->
-								<tr>
+								<tr id="product-detail-info">
 									<td width="80" height="35" style="padding-left:10px">
 										<img src="${pageContext.servletContext.contextPath }/assets/images/i_dot1.gif" width="3" height="3" border="0" align="absmiddle">
 										<font color="666666"><b>가격</b></font>
@@ -103,7 +103,7 @@ $(function(){
 								</tr> 
 								<tr><td colspan="3" bgcolor="E8E7EA"></td></tr>
 								<!-- 옵션 -->
-								<tr>
+								<tr id="product-detail-info">
 									<td width="80" height="35" style="padding-left:10px">
 										<img src="${pageContext.servletContext.contextPath }/assets/images/i_dot1.gif" width="3" height="3" border="0" align="absmiddle">
 										<font color="666666"><b>사이즈</b></font>
@@ -120,7 +120,7 @@ $(function(){
 								</tr>
 								<tr><td colspan="3" bgcolor="E8E7EA"></td></tr>
 								<!-- 수량 -->
-								<tr>
+								<tr id="product-detail-info">
 									<td width="80" height="35" style="padding-left:10px">
 										<img src="${pageContext.servletContext.contextPath }/assets/images/i_dot1.gif" width="3" height="3" border="0" align="absmiddle">
 										<font color="666666"><b>수량</b></font>

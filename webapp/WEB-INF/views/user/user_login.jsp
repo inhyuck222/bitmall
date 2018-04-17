@@ -14,11 +14,38 @@
 </head>
 
 <script type="text/javascript">
+var messageBox = function(title, message, callback){
+	$("#dialog-message").attr("title", title);
+	$("#dialog-message p").text(message);
+	
+	$("#dialog-message").dialog({
+		modal : true,
+		buttons : {
+			"확인" : function() {
+				$(this).dialog("close");
+			}
+		}, 
+		close : callback || function(){}
+	});
+}
+
 $(function(){
 	
-	
+	$("#submit-login").click(function(event){
+		event.preventDefault();
+		if ($("#email").val() == "" || $("#pwd").val == "") {
+			
+			messageBox("로그인", "로그인 정보를 확인 해주세요.", function(){
+				$("#email").val('');
+				$("#pwd").val('');
+				$("#email").focus();
+			});
+			return;
+		}		
+	})
 	
 });
+
 </script>
 
 <body style="margin:0">
@@ -71,18 +98,18 @@ $(function(){
 															<td width="220" height="25">
 																<p style="padding-left:10px;">
 																	<img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/login_id.gif" width="40" height="13" border="0"> 
-																	<input type="text" name="email" size="20" maxlength="12" class="cmfont1">
+																	<input id="email" type="text" name="email" size="20" maxlength="12" class="cmfont1" value="">
 																</p>
 															</td>
 															<td width="100" rowspan="2">
-																<input type='submit' value="로그인"/>
+																<input id="submit-login" type='submit' value="로그인"/>
 															</td>
 														</tr>
 														<tr>
 															<td width="220" height="25">
 																<p style="padding-left:10px;">
 																	<img align="absmiddle" src="${pageContext.servletContext.contextPath }/assets/images/login_pw.gif" width="40" height="13" border="0"> 
-																	<input type="password" name="password" size="20" maxlength="12" class="cmfont1">
+																	<input id="pwd" type="password" name="password" size="20" maxlength="12" class="cmfont1" value="">
 																</p>
 															</td>
 														</tr>
@@ -97,36 +124,23 @@ $(function(){
 										<tr><td height="2" bgcolor="E9E9E9"></td></tr>
 										<tr><td height="15"></td></tr>
 									</table>
-									<table border="0" cellpadding="0" cellspacing="0" width="511">
-										<tr>
-											<td align="center">
-												<table border="0" cellpadding="0" cellspacing="0">
-													<tr>
-														<td height="30"><img src="${pageContext.servletContext.contextPath }/assets/images/login_image6.gif" border="0"></td>
-														<td height="30">
-															<a href="#" onfocus="this.blur()"><img src="${pageContext.servletContext.contextPath }/assets/images/b_id.gif" width="64" height="19" border="0" align="absmiddle"></a> &nbsp; 
-															<a href="#" onfocus="this.blur()"><img src="${pageContext.servletContext.contextPath }/assets/images/b_pw.gif" width="64" height="19" border="0" align="absmiddle"></a>
-														</td>
-													</tr>
-												</table>												
-											</td>
-										</tr>
-									</table>
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
-
-		<!-------------------------------------------------------------------------------------------->	
-		<!-- 끝 : 다른 웹페이지 삽입할 부분                                                                                                                                                              -->
-		<!-------------------------------------------------------------------------------------------->	
-
 		</td>
 	</tr>
 </table>
 <br><br>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+
+
+<div id="dialog-message" title="test" style="display:none">
+	<p>테스트 입니다.</p>
+</div>
+
+
 </body>
 </html>
